@@ -1,0 +1,9 @@
+{
+    "require" : {
+        "symfony/http-foundation" : "*",
+        "symfony/dotenv": "^6.3"
+    },
+    "autoload" : {
+        "files" : ["model.php", "controllers.php"]
+    }
+}
