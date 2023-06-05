@@ -4,6 +4,6 @@
         "symfony/dotenv": "^6.3"
     },
     "autoload" : {
-        "files" : ["model.php", "controllers.php"]
+        "files" : ["controllers.php", "model.php", "database.php"]
     }
 }

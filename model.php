@@ -1,34 +1,42 @@
 <?php
 
-require 'database.php';
-
 function get_all_things() 
 {
+    global $is_development;
+    $things = [];
     $connection = open_database_connection();
-    
-    $result = $connection->query('SELECT id, title FROM post');
-    
-    $posts = [];
-    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-        $posts[] = $row;
+    $sql = "SELECT id, name FROM thing";
+    try {
+        $statement = $connection->query($sql);
+        $things = $statement->fetchAll();
+    } catch(PDOException $exception) {
+        if ($is_development) {
+            echo $exception->getMessage();
+        }
     }
     close_database_connection($connection);
     
-    return $posts;
+    return $things;
 }
 
 
 function get_thing_by_id($id) 
 {
+    global $is_development;
+    $thing = [];
     $connection = open_database_connection();
-    
-    $result = $connection->query('SELECT created_at, title FROM post WHERE id=:id');
-    $statement = $connection->prepare($query);
-    $statement->bindValue(':id', $id, PDO::PARAM_INT);
-    $statement->execute();
-    $row = $statement->fetch(PDO::FETCH_ASSOC);
-    
+    $sql = "SELECT id, name, shape, color FROM thing WHERE id=?";
+    try {
+        $statement = $connection->prepare($sql);
+        $statement->bindParam(1, $id);
+        $statement->execute();
+        $thing = $statement->fetch(PDO::FETCH_ASSOC);
+    } catch(PDOException $exception) {
+        if ($is_development) {
+            echo $exception->getMessage();
+        }
+    }
     close_database_connection($connection);
     
-    return $row;
+    return $thing;
 }

@@ -1,11 +1,11 @@
-<?php $title = 'List of Posts'  ?>
+<?php $title = 'List of Things'  ?>
 <?php ob_start()  ?>
-        <h1>List of Posts</h1>
+        <h1>List of Things</h1>
         <ul>
-            <?php foreach ($posts as $post): ?>
+            <?php foreach ($things as $thing): ?>
             <li>
-                <a href="/show.php?id=<?= $post['id'] ?>">
-                    <?= $post['title'] ?>
+                <a href="./show?id=<?= $thing['id'] ?>">
+                    <?= trim($thing['name']) ?>
                 </a>
             </li>
             <?php endforeach ?>
