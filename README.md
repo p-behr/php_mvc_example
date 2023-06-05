@@ -12,6 +12,22 @@ Installation and usage instructions for IBM i can be found on the [Seiden Group 
 
 Copy `.env.example` to `.env` and update configuration values.
 
+The example application uses a database table called "thing":  
+
+    CREATE TABLE thing (
+        id  integer,
+        name varchar(64),
+        shape varchar(32),
+        color varchar(32)
+    );
+    
+    
+    INSERT INTO thing
+    VALUES
+    (1, 'computer', 'rectangular', 'gray'),
+    (2, 'fan', 'circular', 'black'),
+    (3, 'pen', 'cylindrical', 'blue');
+
 <br>
 
 ### INDEX.PHP
@@ -99,7 +115,7 @@ The controller contains logic that updates the model (data) and/or view (user in
 routed to the controller functions.  The controller functions communicate
 with the model to fetch data, and then update the view.
 
-Controller functions return a Response:
+Controller functions return a Response, so we need to use the Symfony component:
 
     use Symfony\Component\HttpFoundation\Response;
 
@@ -110,7 +126,7 @@ If required, the controller will call functions in the model to fetch data:
 
 The data from the model will be sent to the view:
 
-    $html = render_view_template('templates/list.php');
+    $html = render_view_template('templates/list.php', ['things' => $things]);
 
 ### MODEL.PHP
 
