@@ -29,7 +29,7 @@ function testing_action()
 
 function not_found($uri)
 {
-    $html = render_view_template('templates/notfound.php', ['post' => $post]);
+    $html = render_view_template('templates/notfound.php');
     return new Response($html);
 }
 
