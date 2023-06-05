@@ -2,6 +2,7 @@
 
 function open_database_connection()
 {
+    global $is_development;
     $connection = null;
     $db_user = $_ENV['DB_USER'];
     $db_password = $_ENV['DB_PASSWORD'];
