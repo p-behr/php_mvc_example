@@ -1,25 +1,33 @@
-// This file is the "front-controller";  all requests will 
-// filter through here.  The front-controller will load any
-// files/libraries that will be required, and then routes
-// the incoming request to the appropriate controller.
+### INDEX.PHP
+This file is the "front-controller".  All requests will filter through here.
+The front-controller is responsible for loading files and components that 
+will be globally required and for routing the incoming request to the proper
+controller function based on the request URI and parameters (and often the
+request HTTP method).
 
+<br>
 
+The front-controller will first bootstrap the application by loading
+any files that will be required.  The `autoloader.php` file will import
+files automatically (without require statements).  
+Look in `composer.json` to see a list of files that are being auto-loaded.
 
-// Bootstrap the application (load any required files/libraries).
-// The autoloader will take care of importing files we need for
-// every request.  Look in `composer.json` to see a list of files
-// that are being auto loaded.
-require_once 'vendor/autoload.php';
+    require_once 'vendor/autoload.php';
 
+<br>
 
+The app will use some components from the Symfony framework. 
+These components are installed using [Composer](https://getcomposer.org/).
+You can see the list of required components in `composer.json`.
+The components are downloaded into the `/vendor` folder.
+The components are brought into the app with the `use` statement, which
+is similar to a symbolic link.  
 
-// Components from the Symfony framework that we'll be using.
-// Required components are listed in `composer.json`. 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundataion\Response;
-use Symfony\Component\Dotenv\Dotenv;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundataion\Response;
+    use Symfony\Component\Dotenv\Dotenv;
 
-
+<br>
 
 // Load the environment variables from the `.env` file.
 // Environment variables are available in the $_ENV
