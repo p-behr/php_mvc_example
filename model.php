@@ -8,7 +8,8 @@ function get_all_things()
     $sql = "SELECT id, name FROM thing";
     try {
         $statement = $connection->query($sql);
-        $things = $statement->fetchAll();
+        $result = $statement->fetchAll();
+        $things = array_change_key_case_recursive($result, CASE_LOWER);
     } catch(PDOException $exception) {
         if ($is_development) {
             echo $exception->getMessage();
@@ -30,7 +31,8 @@ function get_thing_by_id($id)
         $statement = $connection->prepare($sql);
         $statement->bindParam(1, $id);
         $statement->execute();
-        $thing = $statement->fetch(PDO::FETCH_ASSOC);
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        $thing = array_change_key_case_recursive($result, CASE_LOWER);
     } catch(PDOException $exception) {
         if ($is_development) {
             echo $exception->getMessage();

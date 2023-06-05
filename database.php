@@ -67,3 +67,17 @@ function build_connection_string()
     
     return $connection_string;
 }
+
+
+// Db2 for i will always return field names in UPPER CASE.
+// This function will convert an array that has upper case field
+// names into lower case so that the code doesn't have to change
+// based on how the field names are defined in the database.
+function array_change_key_case_recursive($arr, $case = CASE_LOWER)
+{
+    return array_map(function($item) use($case) {
+        if(is_array($item))
+            $item = array_change_key_case_recursive($item, $case);
+        return $item;
+    },array_change_key_case($arr, $case));
+}
